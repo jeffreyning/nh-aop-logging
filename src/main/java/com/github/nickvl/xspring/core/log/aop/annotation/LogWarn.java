@@ -18,9 +18,7 @@ import java.lang.annotation.Target;
 @Logging
 public @interface LogWarn {
 
-    /**
-     * A part of the method to be logged. {@link LogPoint#BOTH} by default.
-     */
+
     LogPoint value() default LogPoint.BOTH;
 
 }

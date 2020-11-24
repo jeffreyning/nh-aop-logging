@@ -15,9 +15,7 @@ import java.lang.annotation.*;
 @Logging
 public @interface LogInfo {
 
-    /**
-     * A part of the method to be logged. {@link LogPoint#BOTH} by default.
-     */
+
     LogPoint value() default LogPoint.BOTH;
 
 }
