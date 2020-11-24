@@ -113,7 +113,7 @@ public class TestCtl {
 ````
 	<appender name="interfaceConsole" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%file:%line]- class=%X{callingClass} method=%X{callingMethod} reqId=%X{reqId} userId=%X{userId} bizModule=%X{bizModule} - %msg%n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%file:%line]- class=%X{callingClass} method=%X{callingMethod} reqId=%X{reqId} userId=%X{userId} bizModule=%X{bizModule}  elapsedTime=%X{elapsedTime} - %msg%n</pattern>
 			<charset>UTF-8</charset>
 		</encoder>
 	</appender>
@@ -139,6 +139,7 @@ public class TestCtl {
 						"req_id": "%X{reqId}",
 						"user_id": "%X{userId}",
 						"biz_module": "%X{bizModule}",
+                        "elapsedTime": "%X{elapsedTime}",
 						"stack_trace": "%exception{5}"
 						}
 					</pattern>
@@ -158,11 +159,18 @@ public class TestCtl {
 
 **输出效果**
 ````
-2020-10-20 19:00:21.398 [http-nio-8080-exec-1] INFO  c.g.j.demo.controller.TestCtl [LogStrategy.java:184]- class=com.github.jeffreyning.demo.controller.TestCtl method=query reqId=5fbce7c52847c3398cb1c9d5 userId=admin bizModule=system - calling: query(echo=111)
-2020-10-20 19:00:21.429 [http-nio-8080-exec-1] INFO  c.g.j.demo.controller.TestCtl [LogStrategy.java:189]- class=com.github.jeffreyning.demo.controller.TestCtl method=query reqId=5fbce7c52847c3398cb1c9d5 userId=admin bizModule=system - returning: query(1 arguments):HashMap[{msg=success,data=111,status=0}]
+2020-10-20 19:00:21.398 [http-nio-8080-exec-1] INFO  c.g.j.demo.controller.TestCtl [LogStrategy.java:184]- class=com.github.jeffreyning.demo.controller.TestCtl method=query reqId=5fbce7c52847c3398cb1c9d5 userId=admin bizModule=system  elapsedTime= - calling: query(echo=111)
+2020-10-20 19:00:21.429 [http-nio-8080-exec-1] INFO  c.g.j.demo.controller.TestCtl [LogStrategy.java:189]- class=com.github.jeffreyning.demo.controller.TestCtl method=query reqId=5fbce7c52847c3398cb1c9d5 userId=admin bizModule=system  elapsedTime=31 - returning: query(1 arguments):HashMap[{msg=success,data=111,status=0}]
 ````
+
+**异常日志输出效果**
+````
+2020-11-24 19:45:27.453 [http-nio-8080-exec-3] INFO  c.g.j.demo.controller.TestCtl [LogStrategy.java:184]- class=com.github.jeffreyning.demo.controller.TestCtl method=createException reqId=5fbcf2576d198936a07e718d userId=admin bizModule=system elapsedTime= - calling: createException(echo=NIL)
+2020-11-24 19:45:27.457 [http-nio-8080-exec-3] ERROR c.g.j.demo.controller.TestCtl [LogStrategy.java:125]- class=com.github.jeffreyning.demo.controller.TestCtl method=createException reqId=5fbcf2576d198936a07e718d userId=admin bizModule=system elapsedTime=0 - throwing: createException(1 arguments):class java.lang.NullPointerException
+````
+
 **json日志输出效果**
 ````
-{"project":"log-demo","timestamp":"2020-10-20T19:00:21,398+0800","log_level":"INFO","thread":"http-nio-8080-exec-1","class_name":"com.github.jeffreyning.demo.controller.TestCtl","class_method":"query","line_number":"184","message":"calling: query(echo=111)","req_id":"5fbce7c52847c3398cb1c9d5","user_id":"admin","biz_module":"system","stack_trace":""}
-{"project":"log-demo","timestamp":"2020-10-20T19:00:21,429+0800","log_level":"INFO","thread":"http-nio-8080-exec-1","class_name":"com.github.jeffreyning.demo.controller.TestCtl","class_method":"query","line_number":"189","message":"returning: query(1 arguments):HashMap[{msg=success,data=111,status=0}]","req_id":"5fbce7c52847c3398cb1c9d5","user_id":"admin","biz_module":"system","stack_trace":""}
+{"project":"log-demo","timestamp":"2020-11-24T19:40:57,433+0800","log_level":"INFO","thread":"http-nio-8080-exec-1","class_name":"com.github.jeffreyning.demo.controller.TestCtl","class_method":"query","line_number":"184","message":"calling: query(echo=111)","req_id":"5fbcf1496d198936a07e718c","user_id":"admin","biz_module":"system","elapsedTime":"","stack_trace":""}
+{"project":"log-demo","timestamp":"2020-11-24T19:40:57,473+0800","log_level":"INFO","thread":"http-nio-8080-exec-1","class_name":"com.github.jeffreyning.demo.controller.TestCtl","class_method":"query","line_number":"189","message":"returning: query(1 arguments):HashMap[{msg=success,data=111,status=0}]","req_id":"5fbcf1496d198936a07e718c","user_id":"admin","biz_module":"system","elapsedTime":"24","stack_trace":""}
 ````
