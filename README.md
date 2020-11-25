@@ -181,3 +181,9 @@ public class TestCtl {
 {"project":"log-demo","timestamp":"2020-11-24T19:40:57,433+0800","log_level":"INFO","thread":"http-nio-8080-exec-1","class_name":"com.github.jeffreyning.demo.controller.TestCtl","class_method":"query","line_number":"184","message":"calling: query(echo=111)","req_id":"5fbcf1496d198936a07e718c","user_id":"admin","biz_module":"system","elapsedTime":"","stack_trace":""}
 {"project":"log-demo","timestamp":"2020-11-24T19:40:57,473+0800","log_level":"INFO","thread":"http-nio-8080-exec-1","class_name":"com.github.jeffreyning.demo.controller.TestCtl","class_method":"query","line_number":"189","message":"returning: query(1 arguments):HashMap[{msg=success,data=111,status=0}]","req_id":"5fbcf1496d198936a07e718c","user_id":"admin","biz_module":"system","elapsedTime":"24","stack_trace":""}
 ````
+
+demo演示工程下载地址
+https://pan.baidu.com/s/1zA6urPr3nbsnYY2UOCu9Iw
+扫码订阅爱开发公众号，回复"log"获取下载密码
+![Image text](http://www.jrnsoft.com/qrcode_for_gh.jpg)
+
