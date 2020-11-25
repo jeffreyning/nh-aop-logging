@@ -13,7 +13,7 @@
         <dependency>
             <groupId>com.github.jeffreyning</groupId>
             <artifactId>nh-aop-logging</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
 ````
 
