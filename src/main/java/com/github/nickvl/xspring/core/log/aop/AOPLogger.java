@@ -7,6 +7,7 @@ package com.github.nickvl.xspring.core.log.aop;
 
 import com.github.nickvl.xspring.core.log.aop.annotation.LogModule;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -29,7 +30,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 @Aspect
 public class AOPLogger implements InitializingBean {
-    // private static final Log LOGGER = LogFactory.getLog(AOPLogger.class);
+    private static final Log logger = LogFactory.getLog(AOPLogger.class);
     private LogAdapter logAdapter;
     private Map<Severity, LogStrategy> logStrategies;
     private final LocalVariableTableParameterNameDiscoverer localVariableNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
@@ -64,7 +65,8 @@ public class AOPLogger implements InitializingBean {
     public Object logTheMethod(ProceedingJoinPoint joinPoint) throws Throwable {
 
         Object[] args = joinPoint.getArgs();
-        Log logger = logAdapter.getLog(joinPoint.getTarget().getClass());
+        //modify
+        //Log logger = logAdapter.getLog(joinPoint.getTarget().getClass());
         Method method = extractMethod(joinPoint);
 
         MethodDescriptor descriptor = getMethodDescriptor(method);

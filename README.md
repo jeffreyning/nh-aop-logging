@@ -134,7 +134,6 @@ public class TestCtl {
 						"thread": "%thread",
 						"class_name": "%X{callingClass}",
 						"class_method":"%X{callingMethod}",
-						"line_number": "%line",
 						"message": "%message",
 						"req_id": "%X{reqId}",
 						"user_id": "%X{userId}",
@@ -157,16 +156,24 @@ public class TestCtl {
 	</appender>
 ````
 
+**配置内置loger与appender绑定**
+````
+	<logger name="com.github.nickvl.xspring.core.log.aop.AOPLogger" level="INFO" additivity="false" >
+		<appender-ref ref="interfaceLog"/>
+		<appender-ref ref="interfaceConsole"/>
+	</logger>
+````
+
 **输出效果**
 ````
-2020-10-20 19:00:21.398 [http-nio-8080-exec-1] INFO  c.g.j.demo.controller.TestCtl [LogStrategy.java:184]- class=com.github.jeffreyning.demo.controller.TestCtl method=query reqId=5fbce7c52847c3398cb1c9d5 userId=admin bizModule=system  elapsedTime= - calling: query(echo=111)
-2020-10-20 19:00:21.429 [http-nio-8080-exec-1] INFO  c.g.j.demo.controller.TestCtl [LogStrategy.java:189]- class=com.github.jeffreyning.demo.controller.TestCtl method=query reqId=5fbce7c52847c3398cb1c9d5 userId=admin bizModule=system  elapsedTime=31 - returning: query(1 arguments):HashMap[{msg=success,data=111,status=0}]
+2020-10-20 19:00:21.398 [http-nio-8080-exec-1] INFO  c.g.n.xspring.core.log.aop.AOPLogger [LogStrategy.java:184]- class=com.github.jeffreyning.demo.controller.TestCtl method=query reqId=5fbce7c52847c3398cb1c9d5 userId=admin bizModule=system  elapsedTime= - calling: query(echo=111)
+2020-10-20 19:00:21.429 [http-nio-8080-exec-1] INFO  c.g.n.xspring.core.log.aop.AOPLogger [LogStrategy.java:189]- class=com.github.jeffreyning.demo.controller.TestCtl method=query reqId=5fbce7c52847c3398cb1c9d5 userId=admin bizModule=system  elapsedTime=31 - returning: query(1 arguments):HashMap[{msg=success,data=111,status=0}]
 ````
 
 **异常日志输出效果**
 ````
-2020-11-24 19:45:27.453 [http-nio-8080-exec-3] INFO  c.g.j.demo.controller.TestCtl [LogStrategy.java:184]- class=com.github.jeffreyning.demo.controller.TestCtl method=createException reqId=5fbcf2576d198936a07e718d userId=admin bizModule=system elapsedTime= - calling: createException(echo=NIL)
-2020-11-24 19:45:27.457 [http-nio-8080-exec-3] ERROR c.g.j.demo.controller.TestCtl [LogStrategy.java:125]- class=com.github.jeffreyning.demo.controller.TestCtl method=createException reqId=5fbcf2576d198936a07e718d userId=admin bizModule=system elapsedTime=0 - throwing: createException(1 arguments):class java.lang.NullPointerException
+2020-11-24 19:45:27.453 [http-nio-8080-exec-3] INFO  c.g.n.xspring.core.log.aop.AOPLogger [LogStrategy.java:184]- class=com.github.jeffreyning.demo.controller.TestCtl method=createException reqId=5fbcf2576d198936a07e718d userId=admin bizModule=system elapsedTime= - calling: createException(echo=NIL)
+2020-11-24 19:45:27.457 [http-nio-8080-exec-3] ERROR c.g.n.xspring.core.log.aop.AOPLogger [LogStrategy.java:125]- class=com.github.jeffreyning.demo.controller.TestCtl method=createException reqId=5fbcf2576d198936a07e718d userId=admin bizModule=system elapsedTime=0 - throwing: createException(1 arguments):class java.lang.NullPointerException
 ````
 
 **json日志输出效果**
